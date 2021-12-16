@@ -1,0 +1,11 @@
+FROM avonnadozie/nginx-laravel-server
+
+RUN apk add --update php-sqlite3 php-pdo_sqlite php-xdebug
+
+ENV STARTUP_SCRIPT=deploy/docker/start-dev.sh
+#ENV CRON_FILE=deploy/cron
+ENV RUN_SCHEDULER=1
+ENV PRODUCTION=0
+#ENV RUN_MIGRATIONS_ON_BUILD=1
+ENV COMPOSER_INSTALL_ON_BUILD=1
+

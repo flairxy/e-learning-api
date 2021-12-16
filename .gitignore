@@ -1,0 +1,13 @@
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.env.production
+/.dbdata
+/.serverless
+/.phpunit.result.cache
+/e-learn
+/resources/views/vendor
+/storage/api-docs
+/public/swagger-ui-assets

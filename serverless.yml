@@ -1,0 +1,31 @@
+service: demo-e-learning-api
+
+provider:
+  name: aws
+  region: eu-west-1
+  runtime: provided
+  # The stage of the application, e.g. dev, prod, staging… ('dev' by default)
+  stage: prod
+  environment:
+    # Laravel environment variables
+    APP_STORAGE: '/tmp'
+    PHP_INI_SCAN_DIR: '/var/task/deploy/php/conf.d'
+
+plugins:
+  - ./vendor/bref/bref
+
+functions:
+  api:
+    handler: public/index.php
+    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+    layers:
+      - ${bref:layer.php-73-fpm}
+    events:
+      -   http: 'ANY /'
+      -   http: 'ANY /{proxy+}'
+  artisan:
+    handler: artisan
+    timeout: 120 # in seconds
+    layers:
+      - ${bref:layer.php-73} # PHP
+      - ${bref:layer.console} # The "console" layer
